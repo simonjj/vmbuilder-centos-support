@@ -1,0 +1,10 @@
+#!/bin/sh -e
+#execute firstlogin.sh only once
+if [ ! -e /root/firstlogin_done ]; then
+    if [ -e /root/firstlogin.sh ]; then
+        /root/firstlogin.sh
+    fi
+    # This part should not be necessary any more
+    # sudo dpkg-reconfigure -p critical console-setup &> /dev/null
+    sudo touch /root/firstlogin_done
+fi

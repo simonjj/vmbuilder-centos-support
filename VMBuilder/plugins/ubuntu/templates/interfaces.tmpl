@@ -1,0 +1,22 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+#if $ip == 'dhcp'
+iface eth0 inet dhcp
+#else
+iface eth0 inet static
+        address $ip
+        netmask $mask 
+        network $net
+        broadcast $bcast
+        gateway $gw 
+        # dns-* options are implemented by the resolvconf package, if installed
+        dns-nameservers $dns
+        dns-search $domain
+#end if

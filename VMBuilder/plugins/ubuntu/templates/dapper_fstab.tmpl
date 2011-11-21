@@ -1,0 +1,10 @@
+# /etc/fstab: static file system information.
+#
+# <file system>                                 <mount point>   <type>  <options>       <dump>  <pass>
+proc                                            /proc           proc    defaults        0       0
+#for $part in $parts
+#echo '/dev/%s%-40s %-15s %-7s %-15s %d       %d\n' % ($prefix, part.get_suffix(), part.mntpnt, part.fs.fstab_fstype(), part.fs.fstab_options(), 0, 0)
+#*
+echo "/dev/$prefix$part.get_suffix()                                $part.mntpnt        $part.fs.fstab_fstype()    $part.fs.fstab_options()    0    0
+*#
+#end for

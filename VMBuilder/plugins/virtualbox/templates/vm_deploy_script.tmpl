@@ -1,0 +1,65 @@
+#raw
+#! /usr/bin/env bash
+###############################################################################
+#
+# This script is used to create und register a new VM
+# in VirtualBox
+#
+###############################################################################
+#end raw
+#import os
+#import os.path
+
+
+#if $os_type == "Ubuntu"
+os_type="Ubuntu"
+#else
+os_type="Other"
+#end if
+
+disk_path="#echo os.path.abspath(os.path.dirname($vm_disks[0]))#"
+
+
+VBoxManage createvm -name $vm_name -ostype \$os_type -register
+
+VBoxManage openmedium #slurp
+#set $i = 0
+#for $disk in $vm_disks
+    #set $i = $i + 1
+    #set $disk = os.path.basename(disk)
+disk \${disk_path}/$disk -type normal #slurp
+#end for
+
+VBoxManage modifyvm $vm_name -memory $memory -cpus $cpus -sata on #slurp
+#set $i = 0
+#for $disk in $vm_disks
+    #set $i = $i + 1
+    #set $disk = os.path.basename(disk)
+    #if $i >= 31
+    	#break
+    #end if
+    #if $i == 1
+    	-hda \${disk_path}/$disk #slurp
+    #else if $i == 2
+    	-hdb \${disk_path}/$disk #slurp
+    #else if $i == 3
+    	-hdd \${disk_path}/$disk #slurp
+    #else
+        -sataport${i} \${disk_path}/$disk #slurp
+    #end if
+#end for
+
+#if $mac
+VBoxManage modifyvm $vm_name -macaddress1 $mac
+#end if
+
+#if $ip
+#if $ip == "dhcp"
+VBoxManage modifyvm $vm_name -nic1 nat
+#else
+VBoxManage modifyvm $vm_name -nic1 intnet 
+#end if
+#end if
+
+#activating PAE support for the CPU because some OS (e.g. ubuntu server ) won't boot in a virtual machine without it
+VBoxManage modifyvm $vm_name -pae on

@@ -1,0 +1,19 @@
+# Disk DescriptorFile for Virtual Disk: $diskname
+version=1 
+CID=ffffffff 
+parentCID=ffffffff 
+createType="vmfs" 
+ 
+# Extent description 
+RW $disksize FLAT "$diskname" 0 
+# The Disk Data Base 
+#DDB 
+ddb.toolsVersion = "0" 
+ddb.adapterType = "$adaptertype" 
+ddb.geometry.biosSectors = "$sectors" 
+ddb.geometry.biosHeads = "255" 
+ddb.geometry.biosCylinders = "63" 
+ddb.geometry.sectors = "$sectors" 
+ddb.geometry.heads = "255" 
+ddb.geometry.cylinders = "63" 
+ddb.virtualHWVersion = "4"

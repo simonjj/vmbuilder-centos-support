@@ -1,0 +1,22 @@
+[main]
+cachedir=/var/cache/yum
+keepcache=0
+debuglevel=2
+reposdir=/dev/null
+logfile=/var/log/yum.log
+exactarch=1
+obsoletes=1
+gpgcheck=0
+plugins=1
+assumeyes=1
+retries=20
+
+# repos
+
+[core]
+name=core
+baseurl=$mirror/fedora/linux/releases/$product_version/Everything/$arch/os
+
+[updates-released]
+name=updates
+baseurl=$updates_mirror/fedora/linux/updates/$product_version/$arch

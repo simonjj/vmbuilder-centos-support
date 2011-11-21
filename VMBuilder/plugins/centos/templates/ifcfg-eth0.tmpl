@@ -1,0 +1,9 @@
+DEVICE=eth0
+#if $ip == 'dhcp'
+BOOTPROTO=dhcp
+DHCP_HOSTNAME=$hostname.$domain
+#else
+BOOTPROTO=static
+#end if
+ONBOOT=yes
+TYPE=Ethernet

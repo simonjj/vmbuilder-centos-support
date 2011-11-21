@@ -1,0 +1,17 @@
+# grub.conf
+#
+# Note that you do not have to rerun grub after making changes to this file
+# NOTICE:  You do not have a /boot partition.  This means that
+#          all kernel and initrd paths are relative to /, eg.
+#          root ${grubdevice}
+#          kernel /boot/vmlinuz-version ro root=/dev/hda1
+#          initrd /boot/initrd-version.img
+#boot=/dev/hda
+default=0
+timeout=5
+splashimage=${grubdevice}/boot/grub/splash.xpm.gz
+hiddenmenu
+title CentOS (${kernel_version})
+        root ${grubdevice}
+        kernel /boot/vmlinuz-${kernel_version} ro root=${bootdevice} rhgb quiet
+        initrd /boot/initrd-${kernel_version}.img
